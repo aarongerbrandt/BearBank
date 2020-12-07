@@ -11,9 +11,10 @@ deposit asks the user how much they want to deposit. It will then make
 */
 
 void Account::deposit(){
-    double amount;
+    string samount;
     cout << "How much would you like to deposit? ";
-    getline(cin, amount);
+    getline(cin, samount);
+    double amount = stod(samount);
     Transaction deposit = new Transaction;
     deposit.amount = amount;
     deposit.time = time(NULL);

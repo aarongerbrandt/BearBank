@@ -39,7 +39,7 @@ int main(){
             {
                 //Login to system admin
                 cout << "Logging into system admin" << endl;
-                systemAdminLogin();
+                //systemAdminLogin();
                 break;
             }
 
@@ -47,7 +47,7 @@ int main(){
             {
                 //Login to Bank Official
                 cout << "Logging into bank official" << endl;
-                bankOfficialLogin();
+                //bankOfficialLogin();
                 break;
             }
 
@@ -55,7 +55,7 @@ int main(){
             {
                 //Login to Bank User
                 cout << "Logging into bank user" << endl;
-                bankUserLogin();
+                //bankUserLogin();
                 break;
             }
 
@@ -64,6 +64,11 @@ int main(){
                 //Exit
                 cout << "Thank you for using Bear Bank!" << endl;
                 running = false;
+            }
+
+            default:
+            {
+                cout << "Invalid input. Please try again!" << endl;
             }
         }
     }
@@ -78,6 +83,7 @@ int main(){
 Login functions for each user type
 takes a user and password and then searches for them in the applicable binary tree.
 */
+
 void systemAdminLogin(){
     string username, password;
     cout << "Please enter your username: ";
@@ -108,3 +114,4 @@ void bankUserLogin(){
 
     Users.login(username, password);
 }
+

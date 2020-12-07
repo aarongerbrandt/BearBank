@@ -6,7 +6,8 @@
 Display prints all elements of the tree inorder
 */
 
-void BinaryTree::displayTree(Node *nodePtr){
+template <class T>
+void BinaryTree<T>::displayTree(Node *nodePtr){
     if(nodePtr){
         displayTree(nodePtr -> left);
         cout << object.printData() << endl;
@@ -18,7 +19,8 @@ void BinaryTree::displayTree(Node *nodePtr){
 insertNode will take an element of Type T, create a node for it, then call Insert and add it to the tree
 */
 
-void BinaryTree::insertNode(T element){
+template <class T>
+void BinaryTree<T>::insertNode(T element){
     Node* newNode = new Node;
     newNode -> object = element;
     newNode -> left = nullptr;
@@ -27,7 +29,8 @@ void BinaryTree::insertNode(T element){
     insert(root, newNode);
 }
 
-void BinaryTree::insert(Node *&nodePtr, Node *&newNode){
+template <class T>
+void BinaryTree<T>::insert(Node *&nodePtr, Node *&newNode){
     if(nodePtr == nullptr){
         nodePtr = newNode;
     }
@@ -41,7 +44,8 @@ void BinaryTree::insert(Node *&nodePtr, Node *&newNode){
     }
 }
 
-bool BinaryTree::checkExists(Node *&nodePtr, string s){
+template <class T>
+bool BinaryTree<T>::checkExists(Node *&nodePtr, string s){
     if(nodePtr == nullptr){
         return false;
     }
@@ -59,7 +63,8 @@ bool BinaryTree::checkExists(Node *&nodePtr, string s){
     }
 }
 
-T& BinaryTree::search(Node *&nodePtr, string s){
+template <class T>
+T& BinaryTree<T>::search(Node *&nodePtr, string s){
     if(nodePtr == nullptr){
         return nullptr;
     }
@@ -86,7 +91,8 @@ T& BinaryTree::search(Node *&nodePtr, string s){
 Login
 */
 
-void login(string username, string password){//Takes username and password - returns pointer to object if it finds a match
+template <class T>
+void BinaryTree<T>::login(string username, string password){//Takes username and password - returns pointer to object if it finds a match
             string User = encrypt(username);
             string pass = encrypt(password);
             T account =  search(root, username);

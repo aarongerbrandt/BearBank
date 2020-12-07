@@ -1,6 +1,8 @@
 #ifndef BINARYTREE_H
 #define BINARYTREE_H
+
 #include <iostream>
+#include <string>
 #include "Encryption.h"
 
 /*
@@ -49,6 +51,7 @@ class BinaryTree{
             }
         }
 
+        
         void login(string username, string password);//Takes username and password - returns pointer to object if it finds a match
 };
 
