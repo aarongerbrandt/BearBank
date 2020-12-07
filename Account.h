@@ -26,6 +26,12 @@ class Account{
         void deposit();
         void withdraw();
         
+        void displayData();
+
+        int getAccountNumber(){
+            return accountNumber;
+        }
+        
 };
 
 #endif

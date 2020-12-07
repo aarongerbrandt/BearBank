@@ -22,8 +22,7 @@ class BankOfficial : public User{
             string reasoning = "";
 
             //Account time open/close
-            time_t closingTime;
-            time_t openedTime;
+            time_t closingTime, openingTime;
         };
         vector<closingLog>closedAccounts;
 
@@ -31,7 +30,8 @@ class BankOfficial : public User{
         void openInterface();
         void openAccount();
         void closeAccount();
-        void printClosingLog();
+        void printClosingLog(closingLog);
+        void printClosedAccounts();
         void accessAccount();
         void searchAccounts();
     

@@ -1,4 +1,5 @@
 #include "Account.h"
+#include "Encryption.h"
 #include <iostream>
 #include <string>
 #include <time.h>
@@ -38,4 +39,13 @@ void Account::withdraw(){
     withdrawal.time = time(NULL);
     transactionHistory.push_back(withdrawal);
     balance -= amount;
+}
+
+/*
+displayData takes the data in the account and prints it
+*/
+
+void Account::displayData(){
+    cout << "This account is owned by "<< decrypt(firstName) << " " << decrypt(lastName) << ". They can be contacted at " << decrypt(phoneNumber) <<
+    "\n The Account Number is: " << decryptInt(accountNumber) << " and the current balance is: " << decryptDouble(balance) << endl;
 }
