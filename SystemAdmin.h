@@ -12,6 +12,7 @@ class SystemAdmin : public User{
         //
 
     public:
+        void openInterface();
         void enableBankOfficial();
         void disableBankOfficial();
         void createAccount();

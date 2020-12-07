@@ -20,8 +20,9 @@ class BinaryTree{
         Node* root; //Root node of tree
 
         void insert(Node *&, Node *&); //Inserts a node of type T
-        bool checkExists(Node *&, T); //Returns true if the value exists in the tree
+        bool checkExists(Node *&, string); //Returns true if the value exists in the tree
         void displayTree(Node *&); //Displays tree inorder
+        T& search(Node *&, string); //Returns address to object with that username
 
     public:
         BinaryTree(){ //Constructor
@@ -37,20 +38,18 @@ class BinaryTree{
 
         void insertNode(T); //Will take an element of Type T, create a node for it, then call Insert and add it to the tree
 
-        bool search(T element){
-            if (checkExists(root, element)){
-                return true;
+        T& searchTree(int element){
+            if (checkExists(root, element) == true){
+                T* account = search(root, element);
+                return account;
             }
             else{
-                return false;
+                cout << "Username does not exist." << endl;
+                return nullptr;
             }
         }
 
-        T* login(string username, string password){//Takes username and password - returns pointer to object if it finds a match
-            string User = encrypt(username);
-            string pass = encrypt(password);
-
-        }
+        void login(string username, string password);//Takes username and password - returns pointer to object if it finds a match
 };
 
 #endif
