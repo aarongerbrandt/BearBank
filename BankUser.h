@@ -14,12 +14,14 @@ using namespace std;
 
 class BankUser : public User{
     private:
+        bool open;
         time_t previousLogin;
         vector<CD> CDAccounts;
         vector<CheckingAccount> CheckingAccounts;
         vector<SavingsAccount> SavingsAccounts;
     
     public:
+        BankUser();
         void openInterface();
         void changePassword();
         void displayAccounts();

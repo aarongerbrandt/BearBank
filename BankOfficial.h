@@ -27,6 +27,13 @@ class BankOfficial : public User{
         vector<closingLog>closedAccounts;
 
     public:
+        BankOfficial(string fName, string lName, string user, string pass){
+            firstName = fName;
+            lastName = lName;
+            username = user;
+            password = pass;
+            active = true;
+        }
         void openInterface();
         void openAccount();
         void closeAccount();
@@ -34,6 +41,7 @@ class BankOfficial : public User{
         void printClosedAccounts();
         void accessAccount();
         void searchAccounts();
+
     
 };
 

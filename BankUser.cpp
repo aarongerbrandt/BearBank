@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include "BankUser.h"
+#include "CD.h"
 
 using namespace std;
 
@@ -10,15 +11,16 @@ openInterface opens a GUI for the user to make their decisions in
 
 void BankUser::openInterface(){
     cout << "Welcome, " << firstName << " to BearBank! Please make a decision of the options printed below. Have a good day!" << endl;
-    bool running = True;
+    bool running = true;
     while(running){
-        cout << "[1] View Accounts\n
-        [2] Change Password\n
-        [3] Make Withdrawal\n
-        [4] Make Deposit\n
-        [5] Logout\n"
-        int choice;
-        getline(cin, choice);
+        cout << "[1] View Accounts\n" <<
+        "[2] Change Password\n" <<
+        "[3] Make Withdrawal\n" <<
+        "[4] Make Deposit\n" <<
+        "[5] Logout\n";
+        string schoice;
+        getline(cin, schoice);
+        int choice = stoi(schoice);
         switch(choice){
             case 1:
                 {
@@ -102,11 +104,7 @@ makeDeposit will determine which account the user wants to make the deposit from
 void BankUser::makeDeposit(){
     bool running = true;
     while(running){
-        cout << "What kind of account would you like to deposit to?\n
-        [1] Checking Account\n
-        [2] Savings Account\n
-        [3] CD Account\n
-        [4] Cancel\n";
+        cout << "What kind of account would you like to deposit to?\n [1] Checking Account\n[2] Savings Account\n[3] CD Account\n[4] Cancel\n";
         string soption;
         getline(cin, soption);
         int option = stoi(soption);
@@ -114,13 +112,13 @@ void BankUser::makeDeposit(){
             case 1:
             {
                 //Checking account
-                if(CheckingAccounts.size() = 0){
+                if(CheckingAccounts.size() == 0){
                     cout << "You do not have any checking accounts. Please try again." << endl;
                     break;
                 }
                 cout << "Which account would you like to deposit to?" << endl;
                 for(int i = 0; i < CheckingAccounts.size(); i++){
-                    accountNum = CheckingAccounts.at(i).getAccountNumber();
+                    int accountNum = CheckingAccounts.at(i).getAccountNumber();
                     cout << "[" << i+1 << "] " << accountNum << endl;
                 }
                 string schoice;
@@ -139,13 +137,13 @@ void BankUser::makeDeposit(){
             case 2:
             {
                 //Savings account
-                if(SavingsAccounts.size() = 0){
+                if(SavingsAccounts.size() == 0){
                     cout << "You do not have any savings accounts. Please try again." << endl;
                     break;
                 }
                 cout << "Which account would you like to deposit to?" << endl;
                 for(int i = 0; i < SavingsAccounts.size(); i++){
-                    accountNum = SavingsAccounts.at(i).getAccountNumber();
+                    int accountNum = SavingsAccounts.at(i).getAccountNumber();
                     cout << "[" << i+1 << "] " << accountNum << endl; //Print out all accounts with a number
                 }
                 
@@ -166,13 +164,13 @@ void BankUser::makeDeposit(){
             case 3:
             {
                 //CD Account
-                if(CDAccounts.size() = 0){
+                if(CDAccounts.size() == 0){
                     cout << "You do not have any Certificate of Deposit accounts. Please try again." << endl;
                     break;
                 }
                 cout << "Which account would you like to deposit to?" << endl;
                 for(int i = 0; i < CDAccounts.size(); i++){
-                    accountNum = CDAccounts.at(i).getAccountNumber();
+                    int accountNum = CDAccounts.at(i).getAccountNumber();
                     cout << "[" << i+1 << "] " << accountNum << endl;
                 }
                 string schoice;
@@ -191,7 +189,7 @@ void BankUser::makeDeposit(){
             case 4:
             {
                 //Exit
-                running = false
+                running = false;
             }
 
             default:
@@ -206,11 +204,7 @@ void BankUser::makeDeposit(){
 void BankUser::makeWithdrawal(){
     bool running = true;
     while(running){
-        cout << "What kind of account would you like to withdraw from?\n
-        [1] Checking Account\n
-        [2] Savings Account\n
-        [3] CD Account\n
-        [4] Cancel\n";
+        cout << "What kind of account would you like to withdraw from?\n [1] Checking Account\n[2] Savings Account\n[3] CD Account\n[4] Cancel\n";
         string soption;
         getline(cin, soption);
         int option = stoi(soption);
@@ -218,13 +212,13 @@ void BankUser::makeWithdrawal(){
             case 1:
             {
                 //Checking account
-                if(CheckingAccounts.size() = 0){
+                if(CheckingAccounts.size() == 0){
                     cout << "You do not have any checking accounts. Please try again." << endl;
                     break;
                 }
                 cout << "Which account would you like to withdraw from?" << endl;
                 for(int i = 0; i < CheckingAccounts.size(); i++){
-                    accountNum = CheckingAccounts.at(i).getAccountNumber();
+                    int accountNum = CheckingAccounts.at(i).getAccountNumber();
                     cout << "[" << i+1 << "] " << accountNum << endl;
                 }
                 string schoice;
@@ -243,13 +237,13 @@ void BankUser::makeWithdrawal(){
             case 2:
             {
                 //Savings account
-                if(SavingsAccounts.size() = 0){
+                if(SavingsAccounts.size() == 0){
                     cout << "You do not have any savings accounts. Please try again." << endl;
                     break;
                 }
                 cout << "Which account would you like to withdraw from?" << endl;
                 for(int i = 0; i < SavingsAccounts.size(); i++){
-                    accountNum = SavingsAccounts.at(i).getAccountNumber();
+                    int accountNum = SavingsAccounts.at(i).getAccountNumber();
                     cout << "[" << i+1 << "] " << accountNum << endl; //Print out all accounts with a number
                 }
                 
@@ -270,13 +264,13 @@ void BankUser::makeWithdrawal(){
             case 3:
             {
                 //CD Account
-                if(CDAccounts.size() = 0){
+                if(CDAccounts.size() == 0){
                     cout << "You do not have any Certificate of Deposit accounts. Please try again." << endl;
                     break;
                 }
                 cout << "Which account would you like to withdraw from?" << endl;
                 for(int i = 0; i < CDAccounts.size(); i++){
-                    accountNum = CDAccounts.at(i).getAccountNumber();
+                    int accountNum = CDAccounts.at(i).getAccountNumber();
                     cout << "[" << i+1 << "] " << accountNum << endl;
                 }
                 string schoice;
@@ -295,7 +289,7 @@ void BankUser::makeWithdrawal(){
             case 4:
             {
                 //Exit
-                running = false
+                running = false;
             }
 
             default:

@@ -15,7 +15,7 @@ void Account::deposit(){
     cout << "How much would you like to deposit? ";
     getline(cin, samount);
     double amount = stod(samount);
-    Transaction deposit = new Transaction;
+    Transaction deposit;
     deposit.amount = amount;
     deposit.time = time(NULL);
     transactionHistory.push_back(deposit); //Add it to the history of transactions
@@ -28,14 +28,15 @@ it to the transactionHistory
 */
 
 void Account::withdraw(){
-    double amount;
+    string samount;
     cout << "How much would you like to withdraw? ";
-    getline(cin, amount);
+    getline(cin, samount);
+    double amount = stod(samount);
     if (amount > balance){ // If there isn't enough money it will tell the user to add more money and then exit out of the function
         cout << "Insufficient funds. Please add money to your account and try again." << endl;
         return;
     }
-    Transaction withdrawal = new Transaction;
+    Transaction withdrawal;
     withdrawal.amount  = -amount;
     withdrawal.time = time(NULL);
     transactionHistory.push_back(withdrawal);
@@ -48,5 +49,5 @@ displayData takes the data in the account and prints it
 
 void Account::displayData(){
     cout << "This account is owned by "<< decrypt(firstName) << " " << decrypt(lastName) << ". They can be contacted at " << decrypt(phoneNumber) <<
-    "\n The Account Number is: " << decryptInt(accountNumber) << " and the current balance is: " << decryptDouble(balance) << endl;
+    "\n The Account Number is: " << accountNumber << " and the current balance is: " << balance << endl;
 }

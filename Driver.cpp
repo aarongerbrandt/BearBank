@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+
 #include "BinaryTree.h"
 
 #include "SystemAdmin.h"
@@ -23,6 +24,8 @@ void systemAdminLogin();
 void bankOfficialLogin();
 void bankUserLogin();
 
+int getTotalNodes();
+
 int main(){
     
     bool running = true;
@@ -39,7 +42,7 @@ int main(){
             {
                 //Login to system admin
                 cout << "Logging into system admin" << endl;
-                //systemAdminLogin();
+                systemAdminLogin();
                 break;
             }
 
@@ -47,7 +50,7 @@ int main(){
             {
                 //Login to Bank Official
                 cout << "Logging into bank official" << endl;
-                //bankOfficialLogin();
+                bankOfficialLogin();
                 break;
             }
 
@@ -55,7 +58,7 @@ int main(){
             {
                 //Login to Bank User
                 cout << "Logging into bank user" << endl;
-                //bankUserLogin();
+                bankUserLogin();
                 break;
             }
 
@@ -84,6 +87,7 @@ Login functions for each user type
 takes a user and password and then searches for them in the applicable binary tree.
 */
 
+template <class T>
 void systemAdminLogin(){
     string username, password;
     cout << "Please enter your username: ";
@@ -92,10 +96,10 @@ void systemAdminLogin(){
     cout << "Please enter your password: ";
     getline(cin, password);
     
-    Admins.login(username, password);
+    Admins.BinaryTree<T>::login(username, password);
 }
 
-
+template <class T>
 void bankOfficialLogin(){
     string username, password;
     cout << "Please enter your username: ";
@@ -103,8 +107,10 @@ void bankOfficialLogin(){
     cout << "Please enter your password: ";
     getline(cin, password);
 
-    Officials.login(username, password);
+    Officials.BinaryTree<T>::login(username, password);
 }
+
+template <class T>
 void bankUserLogin(){
     string username, password;
     cout << "Please enter your username: ";
@@ -112,6 +118,13 @@ void bankUserLogin(){
     cout << "Please enter your password: ";
     getline(cin, password);
 
-    Users.login(username, password);
+    
+    Users.BinaryTree<T>::login(username, password);
 }
 
+int getTotalNodes(){
+    int i = Admins.getNodeCount() + Officials.getNodeCount() + Users.getNodeCount();
+    return i;
+}
+
+int getAccountNum();

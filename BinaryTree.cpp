@@ -2,12 +2,22 @@
 #include <iostream>
 #include <string>
 
+using namespace std;
+
+/*
+display calls displayTree
+*/
+template <class T>
+void BinaryTree<T>::display(){
+    displayTree(root);
+}
+
 /*
 Display prints all elements of the tree inorder
 */
 
 template <class T>
-void BinaryTree<T>::displayTree(Node *nodePtr){
+void BinaryTree<T>::displayTree(Node *&nodePtr){
     if(nodePtr){
         displayTree(nodePtr -> left);
         cout << object.printData() << endl;
@@ -44,7 +54,6 @@ void BinaryTree<T>::insert(Node *&nodePtr, Node *&newNode){
     }
 }
 
-template <class T>
 bool BinaryTree<T>::checkExists(Node *&nodePtr, string s){
     if(nodePtr == nullptr){
         return false;
@@ -70,7 +79,7 @@ T& BinaryTree<T>::search(Node *&nodePtr, string s){
     }
     int i = nodePtr -> object.username.compare(s);
     if(i == 0){ //If string equals the username of the object, returns the address of the pointer
-        T &reference = nodePtr -> object
+        T &reference = nodePtr -> object;
         return reference;
     }
 
@@ -95,10 +104,45 @@ template <class T>
 void BinaryTree<T>::login(string username, string password){//Takes username and password - returns pointer to object if it finds a match
             string User = encrypt(username);
             string pass = encrypt(password);
-            T account =  search(root, username);
+            T* account = search(root, username);
             /*if (account == nullptr){
                 cout << "Error" << endl;
                 return nullptr;
             }*/
             account.openInterface();
         }
+
+/*
+getNodeCount calls countNodes and gives it the root pointer
+*/
+
+template <class T>
+int BinaryTree<T>::getNodeCount(){
+    int i = countNodes(root);
+    return i;
+}
+
+/*
+countNodes counts nodes through the use of recursion
+*/
+
+template <class T>
+int BinaryTree<T>::countNodes(Node *&nodePtr){
+    if(nodePtr == nullptr){
+        return 0;
+    }
+    else{
+        return(1 + countNodes(nodePtr -> left) + countNodes(nodePtr -> right));
+    }
+}
+
+template <class T>
+int BinaryTree<T>::countAccounts(Node *&nodePtr){
+    if(nodePtr == nullptr){
+        return 0;
+    }
+    else{
+        return((nodePtr -> object -> CheckingAccounts.size()+1) + (nodePtr -> object -> savingsAccounts.size()+1) + (nodePtr -> object -> CDAccounts.size()+1) + countAccounts(nodePtr -> left) + countAccounts(nodePtr -> right));
+    }
+}
+

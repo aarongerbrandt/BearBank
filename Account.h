@@ -12,9 +12,9 @@ class Account{
     protected:
         bool open; //Can be changed by bank official
         string firstName, lastName, phoneNumber, address;
-        double interestRate, balance;
+        double interestRate, balance, monthlyFee;
         int accountNumber;
-        //friend void SystemAdmin::modifyAccount(); //Gives modifyaccount access to elements
+        static int count; //holds # of accounts created
 
         struct Transaction{ //Data Structure for each time a transaction is made
             time_t time;
