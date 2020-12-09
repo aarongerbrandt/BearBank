@@ -1,21 +1,24 @@
+#ifndef ENCRYPTION_H
+#define ENCRYPTION_H
+#include "Encryption.h"
 #include <string>
 using namespace std;
 
-string encrypt(string s){
+inline string encrypt(string s){
     for (int i = 0; i<s.length(); i++){
         s[i] = s[i] + 45;
     }
     return s;
 }
 
-string decrypt(string s){
+inline string decrypt(string s){
     for (int i = 0; i < s.length(); i++){
         s[i] = s[i] - 45;
     }
     return s;
 }
 
-string encryptDouble(double d){
+inline string encryptDouble(double d){
     string s = to_string(d);
     for (int i = 0; i<s.length(); i++){
         s[i] = s[i] + 45;
@@ -23,7 +26,7 @@ string encryptDouble(double d){
     return s;
 }
 
-double decryptDouble(string s){
+inline double decryptDouble(string s){
     for (int i = 0; i < s.length(); i++){
         s[i] = s[i] - 45;
     }
@@ -31,7 +34,7 @@ double decryptDouble(string s){
     return d;
 }
 
-string encryptInt(int i){
+inline string encryptInt(int i){
     string s = to_string(i);
     for (int i = 0; i < s.length(); i++){
         s[i] = s[i] + 45;
@@ -39,10 +42,11 @@ string encryptInt(int i){
     return s;
 }
 
-int decryptInt(string s){
+inline int decryptInt(string s){
     for (int i = 0; i < s.length(); i++){
         s[i] = s[i] - 45;
     }
     int i = stoi(s);
     return i;
 }
+#endif

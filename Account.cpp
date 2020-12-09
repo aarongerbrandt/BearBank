@@ -48,6 +48,14 @@ displayData takes the data in the account and prints it
 */
 
 void Account::displayData(){
-    cout << "This account is owned by "<< decrypt(firstName) << " " << decrypt(lastName) << ". They can be contacted at " << decrypt(phoneNumber) <<
+    cout << "This account is owned by "<< firstName << " " << lastName << ". They can be contacted at " << phoneNumber <<
     "\n The Account Number is: " << accountNumber << " and the current balance is: " << balance << endl;
+}
+
+/*
+printTransaction prints the details of a transaction
+*/
+
+void Account::printTransaction(Transaction t){
+    cout << "At: " << ctime(t.time) << ", your account balance changed by " << t.amount << endl;
 }

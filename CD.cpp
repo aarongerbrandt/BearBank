@@ -1,4 +1,6 @@
 #include "CD.h"
+#include "Encryption.h"
+#include <fstream>
 #include <iostream>
 #include <string>
 #include <time.h>
@@ -37,4 +39,17 @@ void CD::withdraw(){
     transactionHistory.push_back(withdrawal);
     balance -= amount;
     balance -= penaltyFee;
+}
+
+void CD::saveData(){
+    ofstream output("output.txt");
+    output << endl << encrypt("CDAccount") << endl;
+    //string outputs
+    output << encrypt(firstName) << endl << encrypt(lastName) << endl << encrypt(phoneNumber) << endl << encrypt(address) << endl;
+    //Double outputs
+    output << encryptDouble(interestRate) << endl << encryptDouble(balance) << endl << encryptDouble(monthlyFee) << endl;
+    //Int outputs
+    output << encryptInt(accountNumber) << endl;
+    //time outputs
+    output << encryptInt(openingDate) << endl << encryptInt(closingDate) << endl << encryptInt(maturityDate) << endl;
 }

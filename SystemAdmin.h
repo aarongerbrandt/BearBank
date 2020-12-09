@@ -20,6 +20,8 @@ class SystemAdmin : public User{
         void modifyAccount();
         void retreivePassword();
         void changePassword();
+
+        void saveData();
 };
 
 /*

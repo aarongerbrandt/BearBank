@@ -20,22 +20,24 @@ class CD : public Account{
 
     public:
         CD(){
-            openingDate = time(NULL);
         }
 
-        CD(string fName, string lName, string add, string phoneNum, int accountNum, double intRate, double bal, time_t opening, time_t maturity){
+        CD(string fName, string lName, string add, string phoneNum, double intRate, double bal, time_t opening, time_t maturity){
             firstName = fName;
             lastName = lName;
             address = add;
             phoneNumber = phoneNum;
-            accountNumber = accountNum;
+            accountNumber = assignAccountNumber();
             interestRate = intRate;
             balance = bal;
             openingDate = opening;
             maturityDate = maturity;
             monthlyFee = 0;
-            count++;
         }
+
+        void saveData();
+
+        virtual void withdraw();
 };
 
 #endif

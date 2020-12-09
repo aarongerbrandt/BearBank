@@ -12,8 +12,6 @@
 #include "CheckingAccount.h"
 #include "SavingsAccount.h"
 
-//#include "OS.h"
-
 using namespace std;
 
 BinaryTree<SystemAdmin> Admins;
@@ -23,8 +21,6 @@ BinaryTree<BankUser> Users;
 void systemAdminLogin();
 void bankOfficialLogin();
 void bankUserLogin();
-
-int getTotalNodes();
 
 int main(){
     
@@ -121,10 +117,3 @@ void bankUserLogin(){
     
     Users.BinaryTree<T>::login(username, password);
 }
-
-int getTotalNodes(){
-    int i = Admins.getNodeCount() + Officials.getNodeCount() + Users.getNodeCount();
-    return i;
-}
-
-int getAccountNum();

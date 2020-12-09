@@ -25,11 +25,18 @@ class Account{
     public:
         void deposit();
         void withdraw();
+        void printTransaction(Transaction);
         
         void displayData();
 
         int getAccountNumber(){
             return accountNumber;
+        }
+
+        int assignAccountNumber(){
+            int i = 111111111;
+            return i + count;
+            count++;
         }
         
 };

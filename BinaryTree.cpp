@@ -20,7 +20,7 @@ template <class T>
 void BinaryTree<T>::displayTree(Node *&nodePtr){
     if(nodePtr){
         displayTree(nodePtr -> left);
-        cout << object.printData() << endl;
+        cout << nodePtr -> object.printData() << endl;
         displayTree(nodePtr -> right);
     }
 }
@@ -34,7 +34,7 @@ void BinaryTree<T>::insertNode(T element){
     Node* newNode = new Node;
     newNode -> object = element;
     newNode -> left = nullptr;
-    newNode -> right = nullptr
+    newNode -> right = nullptr;
 
     insert(root, newNode);
 }
@@ -54,6 +54,7 @@ void BinaryTree<T>::insert(Node *&nodePtr, Node *&newNode){
     }
 }
 
+template <class T>
 bool BinaryTree<T>::checkExists(Node *&nodePtr, string s){
     if(nodePtr == nullptr){
         return false;
@@ -63,12 +64,12 @@ bool BinaryTree<T>::checkExists(Node *&nodePtr, string s){
         return true;
     }
 
-    else if(newNode -> object.username.compare(nodePtr -> object.username) < 0){ //If less than 0, look to left
-        return checkExists(nodePtr -> left, newNode);
+    else if(s.compare(nodePtr -> object.username) < 0){ //If less than 0, look to left
+        return checkExists(nodePtr -> left, s);
     }
 
-    else if(newNode -> object.username.compare(nodePtr -> object.username) > 0){ //If greater than 0, add to right
-        return checkExists(nodePtr -> right, newNode);
+    else if(s.compare(nodePtr -> object.username) > 0){ //If greater than 0, add to right
+        return checkExists(nodePtr -> right, s);
     }
 }
 
@@ -143,6 +144,22 @@ int BinaryTree<T>::countAccounts(Node *&nodePtr){
     }
     else{
         return((nodePtr -> object -> CheckingAccounts.size()+1) + (nodePtr -> object -> savingsAccounts.size()+1) + (nodePtr -> object -> CDAccounts.size()+1) + countAccounts(nodePtr -> left) + countAccounts(nodePtr -> right));
+    }
+}
+
+template <class T>
+T& BinaryTree::findAccount(Node *&nodePtr, string user, string pass){
+    if(nodePtr == nullptr){
+        return nullptr;
+    }
+    if(nodePtr -> object.username == user){
+        if(nodePtr -> object.password == pass){
+            return &nodePtr -> object;
+        }
+    }
+    else{
+        return findAccount(nodePtr -> left, user, pass);
+        return findAccount(nodePtr -> right, user, pass);
     }
 }
 

@@ -1,5 +1,7 @@
 #include <iostream>
 #include <string>
+#include <fstream>
+#include "Encryption.h"
 #include "BankUser.h"
 #include "CD.h"
 
@@ -10,6 +12,7 @@ openInterface opens a GUI for the user to make their decisions in
 */
 
 void BankUser::openInterface(){
+    checkTransactions();
     cout << "Welcome, " << firstName << " to BearBank! Please make a decision of the options printed below. Have a good day!" << endl;
     bool running = true;
     while(running){
@@ -25,12 +28,14 @@ void BankUser::openInterface(){
             case 1:
                 {
                     //View accounts
+                    displayAccounts();
                     break;
                 }
 
             case 2:
                 {
                     //Change password
+                    changePassword();
                     break;
                 }
             
@@ -70,6 +75,28 @@ Change Password function prompts the user for their current login/password, encr
 checks if it matches any in the binary tree, if it does, return a pointer to the object and change password.
 */
 
+void BankUser::changePassword(){
+    string tempPass, newPass1, newPass2;
+    cout << "Enter in your current password: ";
+    getline(cin, tempPass)
+    if(tempPass != password){
+        cout << "Error - passwords do not match. Try again." << endl;
+        return;
+    }
+    else{
+        cout << "Enter in your new password: ";
+        getline(cin, newPass1);
+        cout << "Repeat new password: ";
+        getline(cin, newPass2);
+        if(newPass1 == newPass2){
+            password = newPass1;
+            cout << "Your password has now been changed!" << endl;
+            return;
+        }
+    }
+
+}
+
 /*
 Display Accounts will iterate through each vector and print any account they hold
 */
@@ -96,6 +123,19 @@ void BankUser::displayAccounts(){
 checkTransactions will iterate through each of the Transactions of each account vector. It will see if any were within 24 hours and if so, print out
 the time, from what account, and how much was added/subtracted
 */ 
+
+void BankUser::checkTransactions(){
+    for(int i = 0; i < CDAccounts.size(); i++){
+        for(int j = 0; j < CDAccounts.at(i).transactionHistory.size(); j++){
+            time_t comparedTime = CDAccounts.at(i).transactionHistory.at(j).time;
+            time_t currentTime = time(0);
+            double timeDifference = difftime(comparedTime, currentTime) - (60 * 60 * 24);
+            if (timeDifference > 0){
+                printTransaction(CDAccounts.at(i).transactionHistory.at(j));
+            }
+        }
+    }
+}
 
 /*
 makeDeposit will determine which account the user wants to make the deposit from, and then call the deposit function with it
@@ -299,4 +339,37 @@ void BankUser::makeWithdrawal(){
         }
     }
     return;
+}
+
+/*
+saveData saves the user data to output.txt
+*/
+
+void BankUser::saveData(){
+    ofstream output("output.txt");
+    output << encrypt("BankUser");
+    output << encrypt(firstName) << endl << encrypt(lastName) << endl;
+    output << encrypt(username) << endl << encrypt(password) << endl;
+    if (open = true){
+        output << "open" << endl;
+    }
+    else{
+        output << "closed" << endl;
+    }
+    output << endl << encrypt("CDAccounts") << endl;
+    for(int i = 0; i < CDAccounts.size(); i++){
+        CDAccounts.at(i).saveData();
+    }
+    cout << endl;
+    output << endl << encrypt("CheckingAccounts") << endl;
+    for(int i = 0; i < CheckingAccounts.size(); i++){
+        CheckingAccounts.at(i).saveData();
+    }
+    cout << endl;
+    output << endl << encrypt("SavingsAccounts") << endl;
+    for(int i = 0; i < SavingsAccounts.size(); i++){
+        SavingsAccounts.at(i).saveData();
+    }
+    output << endl;
+    
 }

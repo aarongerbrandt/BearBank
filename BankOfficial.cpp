@@ -1,5 +1,7 @@
 #include "BankOfficial.h"
 #include "BinaryTree.h"
+#include "Encryption.h"
+#include <fstream>
 
 #include "CD.h"
 #include "CheckingAccount.h"
@@ -41,24 +43,28 @@ void BankOfficial::openInterface(){
             case 2:
             {
                 //Close account
+                closeAccount();
                 break;
             }
 
             case 3:
             {
                 //Check closed accounts
+                printClosedAccounts();
                 break;
             }
 
             case 4:
             {
                 //Access User Account
+                accessAccount();
                 break;
             }
 
             case 5:
             {
                 //Search for user account
+                searchAccounts();
                 break;
             }
 
@@ -107,7 +113,7 @@ void BankOfficial::openAccount(){
             getline(cin, sBal);
             balance = stod(sBal);
 
-            CheckingAccount cAccount(fName, lName, homeAddress, phone, accountNum, balance);
+            CheckingAccount cAccount(fName, lName, homeAddress, phone, balance);
             //Add to binary tree
         }
 
@@ -129,7 +135,7 @@ void BankOfficial::openAccount(){
             getline(cin, sBal);
             balance = stod(sBal);
 
-            SavingsAccount sAccount(fName, lName, homeAddress, phone, accountNum, interestRate, balance);
+            SavingsAccount sAccount(fName, lName, homeAddress, phone, interestRate, balance);
             //Add to binary tree
         }
 
@@ -158,7 +164,7 @@ void BankOfficial::openAccount(){
             maturity = (matureDays * 60 * 60 * 24); //Converts days to seconds
 
 
-            CD cdAccount(fName, lName, homeAddress, phone, accountNum, interestRate, balance, opening, maturity);
+            CD cdAccount(fName, lName, homeAddress, phone, interestRate, balance, opening, maturity);
             //add account to binary tree HERE
         }
 
@@ -174,21 +180,102 @@ void BankOfficial::openAccount(){
 closeAccount prompts the user for an account number to close. It then must save the official's info
 */
 
-
+void BankOfficial::closeAccount(){
+    string fName, lName;
+    cout << "Please enter the name of the account owner. First name on one line, then Last name." << endl;
+    getline(cin, fName);
+    getline(cin, lName);
+    BankUser* ptr = BankUsers.findAccount(root, fName, lName)
+    ptr.open = false;
+}
 
 /*
 printClosingLog prints information from closingLog in a clear way
 */
 
+void BankOfficial::printClosingLog(ClosingLog log){
+    cout << log.closingOfficialName << ", ID#" << log.closingOfficialID << endl;
+    cout << "Closed Account #" << log.closedAccountNumber << endl << endl;
+    cout << "Their reasoning was : " << reasoning << endl;
+    cout << "If you want to contact the owner of the account, " << log.closedOwnerName <<" they can be contacted at " << log.closedPhoneNumber << " or " << log.closedAddress << endl;
+
+}
+
 /*
 printClosedAccounts takes a vector of closingLog and calls printClosingLog to print them all out
 */
 
+void BankOfficial::printClosedAccounts(){
+    for(int i = 0; i < closedAccounts.size(); i++){
+        printClosingLog(closedAccounts.at(i));
+    }
+}
+
 /*
-accessAccounts asks for the Account num of the account to be accessed. Once provided with a valid ID, it will then ask for the Username and password to be provided by the
-Account owner. Once that is correctly input, then the official can deposit or withdraw from that account
+accessAccounts asks for the username and password of the account owner. The official can then choose which account to access
 */
+
+void BankOfficial::accessAccounts(){
+    string user, pass;
+    cout << "Account Owner: please enter your username: ";
+    getline(cin, user)
+    cout << "Account Owner: please enter your password: ";
+    getline(cin, pass);
+    BankUser *ptr = BankUsers.findAccount(root, user, pass);
+    ptr.openInterface();
+}
 
 /*
 searchAccounts asks the official what criteria they would like to search by(Account Num, Name, PhoneNumber) and searches through the binary tree for that
 */
+
+void BankOfficial::searchAccounts(){
+    string schoice;
+    cout << "[1] Search by Account Number\n" <<
+    "[2] Name\n" <<
+    "[3] Phone Number\n"<<
+    "[4] Exit\n";
+    getline(cin, schoice);
+    int choice = stoi(schoice);
+    switch(choice){
+        case 1:
+        {
+            //Account NUm
+        }
+
+        case 2:
+        {
+            //Name
+        }
+
+        case 3:
+        {
+            //Phone Number
+        }
+
+        case 4:
+        {
+            //Exit
+            return;
+        }
+    }
+}
+
+/*
+saveData saves all of the official's information to output.txt
+*/
+
+void BankOfficial::saveData(){
+    ofstream output("output.txt");
+    output << encrypt("BankOfficial") << endl;
+    output << encrypt(firstName) << endl << encrypt(lastName) << endl;
+    output << encrypt(username) << endl << encrypt(password) << endl;
+    if(active == true){
+        output << "active" << endl;
+    }
+    else{
+        output << "inactive" << endl;
+    }
+    //Save transaction log
+    output << endl;
+}

@@ -34,6 +34,21 @@ class BankOfficial : public User{
             password = pass;
             active = true;
         }
+
+        BankOfficial(string fName, string lName, string user, string pass, string activity){
+            firstName = fName;
+            lastName = lName;
+            username = user;
+            password = pass;
+            if (activity == "active"){
+                active = true;
+            }
+            else{
+                active = false;
+            }
+        }
+        void saveData();
+
         void openInterface();
         void openAccount();
         void closeAccount();

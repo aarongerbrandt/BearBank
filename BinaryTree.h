@@ -29,6 +29,7 @@ class BinaryTree{
         T& search(Node *&, string); //Returns address to object with that username
         int countNodes(Node *&);
         int countAccounts(Node *&);
+        T& findAccount(Node*&, string, string)
 
     public:
         /*BinaryTree(){root = nullptr;}
@@ -39,7 +40,7 @@ class BinaryTree{
 
         void insertNode(T); //Will take an element of Type T, create a node for it, then call Insert and add it to the tree
 
-        T& searchTree(string element);
+        T& searchTree(string element, Node*&);
         
         void login(string username, string password);//Takes username and password - returns pointer to object if it finds a match
 
@@ -50,9 +51,9 @@ searchTree
 */
 
 template <class T>
-T& searchTree(string element){
-    if(checkExists(element)==true){
-        T* account = search(root, element);
+T& BinaryTree<T>::searchTree(string element, Node*& root){
+    if(BinaryTree<T>::checkExists(root, element)==true){
+        T* account = BinaryTree<T>::search(root, element);
         return account;
     }
 else{

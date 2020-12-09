@@ -28,6 +28,7 @@ class BankUser : public User{
         void checkTransactions();
         void makeDeposit();
         void makeWithdrawal();
+        void saveData();
 };
 
 /*

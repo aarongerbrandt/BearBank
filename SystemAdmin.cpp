@@ -1,5 +1,7 @@
 #include "SystemAdmin.h"
 #include "BankOfficial.h"
+#include "Encryption.h"
+#include <fstream>
 #include <iostream>
 #include <string>
 
@@ -12,6 +14,7 @@ using namespace std;
     void modifyAccount();
     void retreivePassword();
     void changePassword();
+
 /*
 enableBankOfficial will prompt the user for the UserID of an official that is disabled to enable them
 */
@@ -94,4 +97,16 @@ void SystemAdmin::openInterface(){
             }
         }
     }
+}
+
+/*
+saveData
+*/
+
+void SystemAdmin::saveData(){
+    ofstream output("output.txt");
+    output << encrypt("SystemAdmin") << endl;
+    output << encrypt(firstName) << endl << encrypt(lastName) << endl;
+    output << encrypt(username) << endl << encrypt(password) << endl;
+    output << endl;
 }
